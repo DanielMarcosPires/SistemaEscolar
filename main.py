@@ -2,17 +2,17 @@ import os
 from classes.Professor import Professor
 from classes.Aluno import Aluno
 from classes.SisGE import SisGE
-
+from classes.Secretaria import Secretaria
 os.system("cls")
 
 escola = SisGE(
     nome="Uninove"
 )
-print("*".center(50,"*"))
-print(escola.get_nome())
-print(escola.get_alunos())
-print(escola.get_professores())
-print(escola.get_secretarias())
-print("*".center(50,"*"))
+secretaria = Secretaria(
+    nome="Ana",
+    idade=30,
+    registro_funcional="123456"
+)
 
-    
+print(secretaria.get_nome())
+print(secretaria.get_idade())
