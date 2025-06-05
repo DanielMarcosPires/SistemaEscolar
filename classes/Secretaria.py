@@ -6,6 +6,9 @@ class Secretaria(Pessoa):
         super().__init__(nome, idade)
         self._registro_funcional = registro_funcional
 
+    def get_registro_funcional(self):
+        return self._registro_funcional
+
     @override
     def get_nome(self):
         return super().get_nome()
