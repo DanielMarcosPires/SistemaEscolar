@@ -17,6 +17,9 @@ class SisGE:
     def get_alunos(self):
         return f"Alunos: {self._alunos}"
     
+    def get_alunosList(self):
+        return self._alunos
+
     def quantidade_de_alunos(self):
         return len(self._alunos)
 

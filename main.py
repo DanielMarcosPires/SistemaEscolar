@@ -8,11 +8,19 @@ from components.input_com_validacao import input_com_validacao
 os.system("cls")
 
 def cadastrarAlunos(escola:SisGE, max:int):
-    os.system('cls')
-    print("(1) - Cadastrar alunos")
+    print("="*20)
+    print("(1) - Cadastrar alunos:\n")
     if escola.quantidade_de_alunos() < max:
-        nome = input("Informe o nome do aluno \n> ")
-        idade = input("Informe a idade do aluno \n>")
+        nome = input_com_validacao(
+            prompt="Informe o nome do aluno \n> ",
+            regex=r"^[A-Z][a-z]+(\s[A-Z][a-z]+)+$",
+            erro_message="A primeira letra deve ser maiúscula do nome e sobrenome!"
+            )
+        idade = input_com_validacao(
+            prompt="Informe a idade do aluno \n>",
+            regex=r"^\d{1,3}$",
+            erro_message="A idade deve ser número!"
+            )
         aluno = Aluno(
             nome=nome,
             idade=idade,
@@ -27,8 +35,8 @@ def cadastrarAlunos(escola:SisGE, max:int):
     else: print("")
 
 def cadastrarProfessores(escola:SisGE, max:int):
-    os.system('cls')
-    print('(2) - Cadastrar professores:')
+    print("="*20)
+    print('(2) - Cadastrar professores:\n')
     if escola.quantidade_de_professores() < max:
         nome = input("Informe o nome do professor\n> ")
         idade = input("Informe a idade do professor\n> ")
@@ -43,6 +51,15 @@ def cadastrarProfessores(escola:SisGE, max:int):
         })
     else: print("")
 
+def excluirAluno(escola:SisGE):
+    print("(3) - Excluir aluno")
+    print(f"{escola.quantidade_de_alunos()} Alunos:")
+    if escola.quantidade_de_alunos() != 0:
+        for i, aluno in enumerate(escola.get_alunosList()):
+            print(f"{i+1} - {aluno}")
+    else:print("[Sem alunos na lista!]")
+
+    input("Aperte enter para sair!")
 
 def sistemaEscolar():
     escola = SisGE(
@@ -70,7 +87,7 @@ def sistemaEscolar():
             info2 = f"{quantidade_de_professores} de {limite_de_professores}"
         else:info2 = f"Atingiu um limite máximo: {quantidade_de_professores} de {limite_de_alunos}*"
 
-        print(f"(1) - Cadastrar alunos - {info1} \n(2) - Cadastrar professores - {info2}")
+        print(f"(1) - Cadastrar alunos - {info1} \n(2) - Cadastrar professores - {info2} \n(3) - Excluir aluno")
         print('='*20)
         
         opcao = input_com_validacao(
@@ -82,6 +99,7 @@ def sistemaEscolar():
         match int(opcao):
             case 1: cadastrarAlunos(escola, limite_de_alunos)
             case 2: cadastrarProfessores(escola, limite_de_professores)
+            case 3: excluirAluno(escola)
 
 
 secretaria = Secretaria(
