@@ -20,11 +20,17 @@ class SisGE:
     def get_alunosList(self):
         return self._alunos
 
+    def delete_alunosList(self,dado:str):
+        return self._alunos.remove(dado)
+
     def quantidade_de_alunos(self):
         return len(self._alunos)
 
     def set_aluno(self,aluno):
         self._alunos.append(aluno)
+
+    def delete_aluno(self,aluno):
+        del self._alunos[aluno]
 
     def get_professores(self):
         return f"Professores: {self._professores}"

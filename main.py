@@ -52,11 +52,19 @@ def cadastrarProfessores(escola:SisGE, max:int):
     else: print("")
 
 def excluirAluno(escola:SisGE):
+    os.system('cls')
     print("(3) - Excluir aluno")
-    print(f"{escola.quantidade_de_alunos()} Alunos:")
+    print(f"")
     if escola.quantidade_de_alunos() != 0:
+        print(f"({escola.quantidade_de_alunos()}) Alunos:")
         for i, aluno in enumerate(escola.get_alunosList()):
             print(f"{i+1} - {aluno}")
+        print("="*10)
+        escolha = int(input("Insira o número indicado para deletar:\n>"))
+        escola.delete_aluno(escolha-1)
+        
+        print(escola.get_alunosList())
+        print("Aluno deletado!")
     else:print("[Sem alunos na lista!]")
 
     input("Aperte enter para sair!")
