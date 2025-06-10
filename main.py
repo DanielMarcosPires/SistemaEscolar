@@ -5,6 +5,7 @@ from classes.Aluno import Aluno
 from classes.SisGE import SisGE
 from classes.Secretaria import Secretaria
 from components.input_com_validacao import input_com_validacao
+from components.limite import limite
 os.system("cls")
 
 def cadastrarAlunos(escola:SisGE, max:int):
@@ -106,15 +107,13 @@ def sistemaEscolar():
         limite_de_alunos = 3 #Limite máximo de alunos
         limite_de_professores = 2 #Limite máximo de professores
 
-        if quantidade_de_alunos < limite_de_alunos:
-            info1 = f"{quantidade_de_alunos} de {limite_de_alunos}"
-        else:info1 = f"Atingiu um limite máximo: {quantidade_de_alunos} de {limite_de_alunos}*"
+        alunos = limite(quantidade_de_alunos,limite_de_alunos)
+        professores = limite(quantidade_de_professores,limite_de_professores)
 
-        if quantidade_de_professores < limite_de_professores:
-            info2 = f"{quantidade_de_professores} de {limite_de_professores}"
-        else:info2 = f"Atingiu um limite máximo: {quantidade_de_professores} de {limite_de_alunos}*"
-
-        print(f"(1) - Cadastrar alunos - {info1} \n(2) - Cadastrar professores - {info2} \n(3) - Excluir aluno\n(4) - Excluir professor")
+        print(f"""(1) - Cadastrar alunos - {alunos} 
+(2) - Cadastrar professores - {professores} 
+(3) - Excluir aluno
+(4) - Excluir professor""")
         print('='*20)
         
         opcao = input_com_validacao(
