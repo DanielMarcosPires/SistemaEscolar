@@ -35,8 +35,14 @@ class SisGE:
     def get_professores(self):
         return f"Professores: {self._professores}"
     
+    def get_professoresList(self):
+        return self._professores
+
     def quantidade_de_professores(self):
         return len(self._professores)
 
     def set_professor(self, professor):
         self._professores.append(professor)
+
+    def delete_professor(self, professor):
+        del self._professores[professor]

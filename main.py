@@ -8,6 +8,7 @@ from components.input_com_validacao import input_com_validacao
 os.system("cls")
 
 def cadastrarAlunos(escola:SisGE, max:int):
+    os.system("cls")
     print("="*20)
     print("(1) - Cadastrar alunos:\n")
     if escola.quantidade_de_alunos() < max:
@@ -35,6 +36,7 @@ def cadastrarAlunos(escola:SisGE, max:int):
     else: print("")
 
 def cadastrarProfessores(escola:SisGE, max:int):
+    os.system("cls")
     print("="*20)
     print('(2) - Cadastrar professores:\n')
     if escola.quantidade_de_professores() < max:
@@ -60,13 +62,30 @@ def excluirAluno(escola:SisGE):
         for i, aluno in enumerate(escola.get_alunosList()):
             print(f"{i+1} - {aluno}")
         print("="*10)
-        escolha = int(input("Insira o número indicado para deletar:\n>"))
+        escolha = int(input("Insira o número indicado para deletar:\n> "))
         escola.delete_aluno(escolha-1)
         
         print(escola.get_alunosList())
         print("Aluno deletado!")
     else:print("[Sem alunos na lista!]")
 
+    input("Aperte enter para sair!")
+
+def excluirProfessores(escola:SisGE):
+    os.system('cls')
+    print("(4) - Excluir professor")
+    if escola.quantidade_de_professores() != 0:
+        print(f"({escola.quantidade_de_professores()}) Professores:")
+
+        for i, professor in enumerate(escola.get_professoresList()):
+            print(f"{i+1} - {professor}")
+
+        escolha = int(input("Insira o número indicado para deletar:\n> "))
+        escola.delete_professor(escolha-1)
+
+        print(escola.get_professores())
+        print("Professor deletado!")
+    else:print("[Sem professores na lista!]")
     input("Aperte enter para sair!")
 
 def sistemaEscolar():
@@ -84,7 +103,7 @@ def sistemaEscolar():
         quantidade_de_alunos = escola.quantidade_de_alunos()
         quantidade_de_professores = escola.quantidade_de_professores()
 
-        limite_de_alunos = 2 #Limite máximo de alunos
+        limite_de_alunos = 3 #Limite máximo de alunos
         limite_de_professores = 2 #Limite máximo de professores
 
         if quantidade_de_alunos < limite_de_alunos:
@@ -95,7 +114,7 @@ def sistemaEscolar():
             info2 = f"{quantidade_de_professores} de {limite_de_professores}"
         else:info2 = f"Atingiu um limite máximo: {quantidade_de_professores} de {limite_de_alunos}*"
 
-        print(f"(1) - Cadastrar alunos - {info1} \n(2) - Cadastrar professores - {info2} \n(3) - Excluir aluno")
+        print(f"(1) - Cadastrar alunos - {info1} \n(2) - Cadastrar professores - {info2} \n(3) - Excluir aluno\n(4) - Excluir professor")
         print('='*20)
         
         opcao = input_com_validacao(
@@ -108,6 +127,7 @@ def sistemaEscolar():
             case 1: cadastrarAlunos(escola, limite_de_alunos)
             case 2: cadastrarProfessores(escola, limite_de_professores)
             case 3: excluirAluno(escola)
+            case 4: excluirProfessores(escola)
 
 
 secretaria = Secretaria(
