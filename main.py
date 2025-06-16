@@ -52,17 +52,25 @@ def cadastrarProfessores(escola:SisGE, max:int):
             "idade":professor.get_idade(),
             "disciplina":professor.get_disciplina()
         })
-    else: print("")
+    else: pass
+
+def mostrarSala(escola:SisGE):
+    os.system("cls")
+    print("(5) - Mostrar salas")
+    print(f"Salas: {escola.get_listarSalas()}")
+    input("Aperte enter para sair!")
 
 def excluirAluno(escola:SisGE):
     os.system('cls')
-    print("(3) - Excluir aluno")
-    print(f"")
+    print("(3) - Excluir aluno\n")
     if escola.quantidade_de_alunos() != 0:
         print(f"({escola.quantidade_de_alunos()}) Alunos:")
+        
         for i, aluno in enumerate(escola.get_alunosList()):
             print(f"{i+1} - {aluno}")
+        
         print("="*10)
+        
         escolha = int(input("Insira o número indicado para deletar:\n> "))
         escola.delete_aluno(escolha-1)
         
@@ -89,44 +97,53 @@ def excluirProfessores(escola:SisGE):
     else:print("[Sem professores na lista!]")
     input("Aperte enter para sair!")
 
+def info(escola:SisGE):
+    print('*'*20)
+    print(escola.get_nome())
+    print(escola.get_alunos())
+    print(escola.get_professores())
+    print('*'*20)
+
+def info_control(alunos,professores):
+    print(f"(1) - Cadastrar alunos - {alunos}")
+    print(f"(2) - Cadastrar professores - {professores}")
+    print(f"(3) - Excluir aluno")
+    print(f"(4) - Excluir professor")
+    print(f"(5) - Mostrar salas")
+    print('='*20)
+    
+    
+
 def sistemaEscolar():
     escola = SisGE(
         nome="Uninove"
     )
     while True:
         os.system('cls')
-        print('*'*20)
-        print(escola.get_nome())
-        print(escola.get_alunos())
-        print(escola.get_professores())
-        print('*'*20)
-
+        info(escola)
         quantidade_de_alunos = escola.quantidade_de_alunos()
         quantidade_de_professores = escola.quantidade_de_professores()
 
-        limite_de_alunos = 3 #Limite máximo de alunos
+        limite_de_alunos = 2 #Limite máximo de alunos
         limite_de_professores = 2 #Limite máximo de professores
 
         alunos = limite(quantidade_de_alunos,limite_de_alunos)
         professores = limite(quantidade_de_professores,limite_de_professores)
 
-        print(f"""(1) - Cadastrar alunos - {alunos} 
-(2) - Cadastrar professores - {professores} 
-(3) - Excluir aluno
-(4) - Excluir professor""")
-        print('='*20)
+        info_control(alunos,professores)
         
         opcao = input_com_validacao(
             prompt="Escolha uma opção:\n> ",
             regex=r"\d+$",
             erro_message="Deve ser um número, tente novamente!"
         )
-
+        
         match int(opcao):
             case 1: cadastrarAlunos(escola, limite_de_alunos)
             case 2: cadastrarProfessores(escola, limite_de_professores)
             case 3: excluirAluno(escola)
             case 4: excluirProfessores(escola)
+            case 5: mostrarSala(escola)
 
 
 secretaria = Secretaria(

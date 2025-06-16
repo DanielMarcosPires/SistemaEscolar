@@ -6,6 +6,7 @@ class SisGE:
         self._nome = nome
         self._alunos = []
         self._professores = []
+        self._salas = []
 
     def cadastrar_alunos(self, nomeDoAluno:str, idadeDoAluno:int):
         aluno = Aluno(nomeDoAluno,idadeDoAluno,20)
@@ -43,6 +44,9 @@ class SisGE:
 
     def set_professor(self, professor):
         self._professores.append(professor)
+
+    def get_listarSalas(self):
+        return self._salas
 
     def delete_professor(self, professor):
         del self._professores[professor]
